@@ -1,12 +1,74 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
+
 <head>
-  <title>Hello, world!</title>
+  <title>ArcGIS Map Example</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="" />
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.25/"></script>
+
+  <script>
+    require([
+      "esri/config",
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/widgets/BasemapGallery",
+      "esri/widgets/Locate",
+      "esri/widgets/Search"
+    ], function (esriConfig, Map, MapView, BasemapGallery, Locate, Search) {
+
+      esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurG7Kc3KVqtHltIRLCFNCxaBV0QBgFH0kaB8bmhJFh8yXPfP7Gf9lB3YEtycNd8eEa7fH6ApVpEFu6pYduIW4UtU4YJp2iPJmMmUVJOmwaAya3kgcBFeNJVmG5W15afdm_IZ-K6DWkiQwNU7gX5ZbJZ254Mfv4gi2ZWP0PjfJXbgQYXlY4vqhmQn9K0Rh2sSK7FAW2QI5BuSIImfAtBQqr5evH-7IYZCg9Fg4N8W2HwWsAT1_7aSz4l4H";
+
+      const map = new Map({
+        basemap: "osm"
+      });
+
+      const view = new MapView({
+        map: map,
+        center: [-93.2581, 44.9866], //longitude, latitude
+        zoom: 14,
+        container: "viewDiv"
+      });
+
+      //Basemap Gallery
+      const basemapGallery = new BasemapGallery({
+        view: view
+      });
+      view.ui.add(basemapGallery, "top-right");
+
+      //Locate Button
+      const locateWidget = new Locate({
+        view: view
+      });
+      view.ui.add(locateWidget, "top-left");
+
+      //Search Widget
+      const searchWidget = new Search({
+        view: view
+      });
+      view.ui.add(searchWidget, {
+        position: "top-left",
+        index: 2
+      });
+    });
+  </script>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Hello, world! I am using GitHub!</h1>
+  <div id="viewDiv"></div>
 </body>
+
 </html>
